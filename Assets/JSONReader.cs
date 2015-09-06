@@ -19,6 +19,8 @@ public class JSONReader : MonoBehaviour {
 			mail.email = mailJson[i]["email"];
 			mail.subject = mailJson[i]["subject"];
 			mail.company = mailJson[i]["company"];
+			mail.date = mailJson[i]["date"];
+			mail.name = mailJson[i]["name"]["first"] + " " + mailJson[i]["name"]["last"];
 			Debug.Log(mail.email);
 			mailList.Add(mail);
 		}
@@ -48,5 +50,8 @@ public class JSONReader : MonoBehaviour {
 		public string email;
 		public string company;
 		public string subject;
+		public string sender;
+		public string date;
+
 	}
 }
