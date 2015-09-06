@@ -11,7 +11,9 @@ public class JSONReader : MonoBehaviour {
 	void Start () {
 	
 		string mailJsonString = readTextFile ("Assets/mail.json");
+
 		Debug.Log (mailJsonString);
+
 		var mailJson = JSON.Parse(mailJsonString);
 		List<MailObject> mailList = new List<MailObject>();
 		for (int i = 0; i<10; i++) {
@@ -24,7 +26,22 @@ public class JSONReader : MonoBehaviour {
 			Debug.Log(mail.email);
 			mailList.Add(mail);
 		}
+		//Free up the memory
+		mailJsonString = null;
+		mailJson = null;
 
+
+		string todoJsonString = readTextFile ("Assets/todo.json");
+		var todoJson = JSON.Parse (todoJsonString);
+		List<TodoObject> todoList = new List<TodoObject> ();
+		for (int i = 0; i<10; i++) {
+			TodoObject todo = new TodoObject();
+			todo.date = todoJson[i]["date"];
+			todo.task = todoJson[i]["task"];
+			todo.done = bool.Parse(todoJson[i]["status"]);
+			Debug.Log(todo.done);
+			todoList.Add(todo);
+		}
 	}
 	
 	// Update is called once per frame
@@ -52,6 +69,13 @@ public class JSONReader : MonoBehaviour {
 		public string subject;
 		public string sender;
 		public string date;
+		public string name;
 
+	}
+
+	public class TodoObject {
+		public string date;
+		public string task;
+		public bool done;
 	}
 }
